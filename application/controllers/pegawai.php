@@ -61,7 +61,13 @@ class pegawai extends CI_Controller {
 		}
 	}
     function dataPegawai(){
-        $this->load->view('pegawai');
+        $pegawai = $this->m_pegawai->select4Table("pegawai", "pegawai_nama", "pegawai.id_pegawai = pegawai_nama.id_pegawai", "jabatan", "pegawai.jabatan_pegawai = jabatan.id_jabatan", "agama", "pegawai.agama_pegawai = agama.id_agama");
+        $data = array (
+            "page" => "pegawai",
+            "pegawai" => $pegawai,
+            "aksi" => "lihatdata"
+        );
+        $this->load->view('pegawai', $data);
     }
     function dataGaji(){
         $this->load->view('gaji');

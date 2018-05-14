@@ -12,7 +12,7 @@
         <a href="<?php base_url("index.php/pegawai/") ?>"><h4>Home</h4></a>
         <div class="row">
             <div class="col-sm-4" style="padding-top:10px; padding-bottom:10px">
-                <a href="<?php echo base_url("index.php/pegawai/dataPegawai") ?>">
+                <a href="<?php echo base_url("index.php/pegawai/dataPegawai/lihatPegawai") ?>">
                     <div class="card" style="width:100%; height:250px;">
                         <div class="card-body" style="text-align:center">
                             <h1 style="font-size:120px; color: #00aeff;"><i class="fa fa-users"></i></h1>

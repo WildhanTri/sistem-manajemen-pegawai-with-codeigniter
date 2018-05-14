@@ -48,6 +48,23 @@ class m_pegawai extends CI_MODEL {
         $this->db->where($where);
         return $this->db->get()->result();
     }
+    public function select4Table($table, $table2, $on, $table3, $on2, $table4, $on3){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join($table2, $on);
+        $this->db->join($table3, $on2);
+        $this->db->join($table4, $on3);
+        return $this->db->get()->result();
+    }
+    public function select4TableWhere($table, $table2, $on, $table3, $on2, $table4, $on3, $where){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join($table2, $on);
+        $this->db->join($table3, $on2);
+        $this->db->join($table4, $on3);
+        $this->db->where($where);
+        return $this->db->get()->result();
+    }
     public function selectLastID($db, $table){
         $this->db->db_select("information_schema");
         $this->db->select('*');
