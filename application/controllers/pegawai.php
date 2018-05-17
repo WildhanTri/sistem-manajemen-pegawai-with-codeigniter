@@ -2,86 +2,47 @@
 
 defined('BASEPATH') or exit ('No Direct script access allowed');
 
-class pegawai extends CI_Controller {
+class pegawai extends MY_Controller {
     
     function __construct(){
         parent::__construct();
         $this->load->model('m_pegawai');
     }
     
-    function randomGen($jumlahChar){
-        $karakter = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $key = "";
-        for($a=0; $a<$jumlahChar; $a++){
-            $arrChar = rand(0, strlen($karakter)-1);
-            $key .= $karakter[$arrChar];
-        }
-        return $key;
+    function tampil_data_pegawai($id=0){
+        $jml = $this->db->get('pegawai');
+        $config['base_url'] = base_url().'index.php/pegawai/tampil_data_pegawai/';
+        $config['use_page_numbers'] = false;
+        $config['total_rows'] = $jml->num_rows();
+        $config['per_page'] = '10';
+        $from = $this->uri->segment(3);
+        $this->pagination->initialize($config);
+        $pegawai = $this->m_pegawai->get_data_pegawai($config['per_page'], $id);
+        $data = array (
+            "pegawai" => $pegawai
+        );
+        $this->load->view('pegawai/pegawai_index', $data);
     }
-    
-    function index(){
-        if($this->session->userdata('nama') != null){
-            $data = array (
-                "page" => "Pegawai"
-            );
-            $this->load->view('home', $data);
-        }else{
-            $data = array (
-                "page" => "Login"
-            );
-            $this->load->view('login', $data);
-        }
+    function tampil_tambah_pegawai(){
+        $noID = $this->m_pegawai->selectLastID("pegawai", "pegawai");
+        $data = array (
+            "page" => "pegawai",
+            "aksi" => "tambahdata",
+            "agama" => $this->agama(),
+            "jabatan" => $this->jabatan(),
+            "id" => "KR-".str_pad($noID[0]->AUTO_INCREMENT, "3", "0", STR_PAD_LEFT),
+        );
+        $this->load->view('pegawai/pegawai_form', $data);
     }
-    function login(){
-        $this->load->view('login');
-    }
-	function prosesLogin(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-		$where = array(
-			'username' => $username,
-			'password' => md5($password)
-			);
-        
-		$cek = $this->m_pegawai->selectWhere("user",$where);
-		if(count($cek) > 0){
- 
-			$data_session = array(
-				'id_user' => $cek[0]->id_user,
-				'nama' => $username,
-				'status' => "login"
-				);
- 
-			$this->session->set_userdata($data_session);
- 
-			redirect(base_url("index.php/pegawai"));
- 
-		}else{
-			echo "Username dan password salah !";
-		}
-	}
-    function dataPegawai(){
-        $pegawai = $this->m_pegawai->select4Table("pegawai", "pegawai_nama", "pegawai.id_pegawai = pegawai_nama.id_pegawai", "jabatan", "pegawai.jabatan_pegawai = jabatan.id_jabatan", "agama", "pegawai.agama_pegawai = agama.id_agama");
+    function editPegawai($id){
+        $pegawai = $this->m_pegawai->select2TableWhere("pegawai", "pegawai_nama", "pegawai.id_pegawai = pegawai_nama.id_pegawai", "pegawai.id_pegawai = $id");
         $data = array (
             "page" => "pegawai",
             "pegawai" => $pegawai,
-            "aksi" => "lihatdata"
+            "aksi" => "editdata"
         );
         $this->load->view('pegawai', $data);
     }
-    function dataGaji(){
-        $this->load->view('gaji');
-    }
-    function dataAbsen(){
-        $this->load->view('absen');
-    }
-    function settings(){
-        $this->load->view('settings');
-    }
-    function logout(){
-		$this->session->sess_destroy();
-		redirect(base_url('index.php/kasir/'));
-	}
 }
 
 ?>

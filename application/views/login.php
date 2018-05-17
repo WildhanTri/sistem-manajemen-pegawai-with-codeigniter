@@ -1,5 +1,5 @@
 <div class="card bg-dark" style="width:700px; padding:50px 80px; margin:auto; margin-top:100px;">
-    <form action="<?php echo base_url('index.php/pegawai/prosesLogin') ?>" method="post">
+    <form action="<?php echo base_url('index.php/main/prosesLogin') ?>" method="post">
         <table class="table" style="color:white;">
             <tr>
                 <td colspan="2" style="border:0px;">
