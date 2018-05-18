@@ -19,11 +19,17 @@ class MY_controller extends CI_Controller {
         return $key;
     }
     
+    function selectLastID($db,$table){
+        return $this->m_pegawai->selectLastID($db,$table);
+    }
     function agama(){
         return $this->m_pegawai->select('agama');
     }
     function jabatan(){
         return $this->m_pegawai->select('jabatan');
+    }
+    function tunjangan(){
+        return $this->m_pegawai->select('tunjangan');
     }
     
 }

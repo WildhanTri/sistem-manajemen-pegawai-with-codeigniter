@@ -15,6 +15,23 @@ class m_pegawai extends MY_MODEL {
         return $this->db->get()->result();
     }
     
+    public function add_data_pegawai($datapegawai, $datapegawainama, $datagaji, $datatunjangan){
+        var_dump($datapegawai);
+        $pegawai = $this->db->insert('pegawai', $datapegawai);
+        $nama = $this->db->insert('pegawai_nama', $datapegawainama);
+        $gaji = $this->db->insert('pegawai_gaji', $datagaji);
+        foreach($datatunjangan as $key=>$value){
+            $this->db->insert('tunjangan_pegawai', array('id_pegawai' => $datapegawai['id_pegawai'], 'id_tunjangan' => $key, 'status' => $value));
+        }
+    }
+    
+    public function get_data_jabatan($id){
+        $this->db->select('*');
+        $this->db->from("jabatan");
+        $this->db->where(array('id_jabatan' => $id));
+        return $this->db->get()->result();
+    }
+    
     
 }
 
