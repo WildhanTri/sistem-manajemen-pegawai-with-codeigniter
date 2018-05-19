@@ -56,7 +56,7 @@
                                     <a href="<?php echo base_url().'index.php/pegawai/tampil_edit_pegawai/'.$p->id_pegawai ?>"><button class="btn btn-success" style="width:100%"><i class="fa fa-edit"></i>&nbsp; Edit</button></a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="<?php echo base_url().'index.php/pegawai/hapusPegawai/'.$p->id_pegawai ?>"><button class="btn btn-danger" style="width:100%"> <i class="fa fa-trash-alt "></i>&nbsp; Delete</button></a>
+                                    <a href="<?php echo base_url().'index.php/pegawai/hapus_pegawai/'.$p->id_pegawai ?>"><button class="btn btn-danger" style="width:100%"> <i class="fa fa-trash-alt "></i>&nbsp; Delete</button></a>
                                 </div>
                             </div>
                         </td>

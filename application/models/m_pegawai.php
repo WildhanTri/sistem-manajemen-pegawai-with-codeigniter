@@ -47,9 +47,10 @@ class m_pegawai extends MY_MODEL {
         foreach($datatunjangan as $key=>$value){
             $idpegawai['id_tunjangan'] = $key;
             $e = $this->db->update('tunjangan_pegawai', array('status' => $value), $idpegawai );
-            var_dump($key); echo "=>";
-            var_dump($value); echo "<br>";
         }
+    }
+    public function delete_data_pegawai($id){
+        $this->db->delete('pegawai', $id);
     }
     
     public function get_data_jabatan($id){

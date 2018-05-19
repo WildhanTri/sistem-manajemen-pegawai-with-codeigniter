@@ -80,6 +80,7 @@ class pegawai extends MY_Controller {
             $datatunjangan[$t->id_tunjangan] = (isset($tunjangan[$t->id_tunjangan])) ? 1 : 0;
         }
         $insertpegawai = $this->m_pegawai->add_data_pegawai($datapegawai, $datapegawainama, $datagaji, $datatunjangan);
+        redirect('pegawai/tampil_data_pegawai', 'refresh');
     }
     
     function proses_edit_pegawai(){
@@ -109,6 +110,16 @@ class pegawai extends MY_Controller {
             $datatunjangan[$t->id_tunjangan] = (isset($tunjangan[$t->id_tunjangan])) ? 1 : 0;
         }
         $editpegawai = $this->m_pegawai->edit_data_pegawai($datapegawai, $datapegawainama, $datagaji, $datatunjangan, $idpegawai);
+        redirect('pegawai/tampil_data_pegawai', 'refresh');
+    }
+    
+    function hapus_pegawai($id){
+        $data = array(
+            'id_pegawai' => $id
+        );
+        
+        $deletepegawai = $this->m_pegawai->delete_data_pegawai($data);
+        redirect('pegawai/tampil_data_pegawai', 'refresh');
     }
     
     function salaryRange($idjabatan){
