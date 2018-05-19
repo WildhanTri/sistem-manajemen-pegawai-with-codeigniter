@@ -18,7 +18,6 @@
                 <table class="table table-stripped" id="data">
                     <tr>
                         <th onclick="prosesSortSiswa('nisn', 'DESC', this)" id="sortByNISN">ID Pegawai</th>
-                        <th onclick="prosesSortSiswa('nisn', 'DESC', this)" id="sortByNISN">ID Pegawai</th>
                         <th onclick="prosesSortSiswa('nama', 'DESC', this)" id="sortByNama">Nama Pegawai</th>
                         <th onclick="prosesSortSiswa('kelas', 'DESC', this)" id="sortByKelas">Jabatan Pegawai</th>
                         <th onclick="prosesSortSiswa('alamat', 'DESC', this)" id="sortByAlamat">Alamat</th>
@@ -30,7 +29,6 @@
                     <?php $no = $this->uri->segment('3') + 1; if($pegawai != null) : ?>
                     <?php foreach($pegawai as $p) : ?>
                     <tr class="rowdata">
-                        <td><?php echo $no++; ?></td>
                         <td>
                             <?php echo $p->id_pegawai; ?>
                         </td>
@@ -55,7 +53,7 @@
                         <td>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="<?php echo base_url().'index.php/pegawai/editPegawai/'.$p->id_pegawai ?>"><button class="btn btn-success" style="width:100%"><i class="fa fa-edit"></i>&nbsp; Edit</button></a>
+                                    <a href="<?php echo base_url().'index.php/pegawai/tampil_edit_pegawai/'.$p->id_pegawai ?>"><button class="btn btn-success" style="width:100%"><i class="fa fa-edit"></i>&nbsp; Edit</button></a>
                                 </div>
                                 <div class="col-sm-6">
                                     <a href="<?php echo base_url().'index.php/pegawai/hapusPegawai/'.$p->id_pegawai ?>"><button class="btn btn-danger" style="width:100%"> <i class="fa fa-trash-alt "></i>&nbsp; Delete</button></a>
@@ -63,7 +61,7 @@
                             </div>
                         </td>
                     </tr>
-
+                    <?php $no++; ?>
                     <?php endforeach ?>
                     <tr>
                         <td>
