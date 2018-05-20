@@ -5,17 +5,28 @@
     <?php $this->load->view('css'); ?>
     <?php $this->load->view('js'); ?>
 </head>
-
+<style>
+    .rowdata td {
+        vertical-align: middle !important;
+    }
+    
+    .table tr td {
+        color: #636363;
+        font-size: 13px;
+    }
+    
+</style>
 <body>
     <?php $this->load->view('component/header') ?>
     <div class="container" style="padding-top:70px;">
-        <h4>Data Pegawai</h4>
+        <h4><a href="<?php echo base_url('') ?>"><i class="fa fa-arrow-left  "></i></a>Data Pegawai</h4>
         <div class="row">
             <div class="col-sm-12">
                 <a href="<?php echo base_url('index.php/pegawai/tampil_tambah_pegawai') ?>">
                     <button class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; Add</button>
                 </a>
-                <table class="table table-stripped" id="data">
+                <table class="table table table-hover" id="data">
+                    <thead class="thead-dark">
                     <tr>
                         <th onclick="prosesSortSiswa('nisn', 'DESC', this)" id="sortByNISN">ID Pegawai</th>
                         <th onclick="prosesSortSiswa('nama', 'DESC', this)" id="sortByNama">Nama Pegawai</th>
@@ -26,10 +37,11 @@
                         <th onclick="prosesSortSiswa('alamat', 'DESC', this)" id="sortByAlamat">Email</th>
                         <th></th>
                     </tr>
+                    </thead>
                     <?php $no = $this->uri->segment('3') + 1; if($pegawai != null) : ?>
                     <?php foreach($pegawai as $p) : ?>
                     <tr class="rowdata">
-                        <td>
+                        <td style="text-align:center">
                             <?php echo $p->id_pegawai; ?>
                         </td>
                         <td>
