@@ -23,6 +23,26 @@ class gaji extends MY_Controller {
         );
         $this->load->view('gaji/gaji_index', $data);
     }
+    
+    function cari_nama_pegawai($id){
+        $data = array ( "pegawai.id_pegawai" => $id );
+        $pegawai = $this->m_gaji->get_single_data_pegawai($data);
+        if($pegawai == true){
+            $data = array (
+            'id_pegawai' => $pegawai[0]->id_pegawai,
+            'nama_pegawai' => $pegawai[0]->nama_depan." ".$pegawai[0]->nama_tengah." ".$pegawai[0]->nama_belakang,
+            'status' => 'success',
+            );
+        }else{
+            $data = array (
+            'id_pegawai' => "tidak ditemukan",
+            'nama_pegawai' => "tidak ditemukan",
+            'status' => 'failed',
+            );
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
 }
 
 ?>

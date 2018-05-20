@@ -20,9 +20,6 @@ class m_gaji extends MY_MODEL {
         $this->db->select('*');
         $this->db->from("pegawai");
         $this->db->join("pegawai_nama", "pegawai.id_pegawai = pegawai_nama.id_pegawai");
-        $this->db->join("pegawai_gaji", "pegawai.id_pegawai = pegawai_gaji.id_pegawai");
-        $this->db->join("jabatan", "pegawai.jabatan_pegawai = jabatan.id_jabatan");
-        $this->db->join("agama", "pegawai.agama_pegawai = agama.id_agama");
         $this->db->where($id);
         return $this->db->get()->result();
     }

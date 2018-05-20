@@ -183,13 +183,19 @@
                         ID
                     </div>
                     <div class="col-sm-4" style="padding:5px 15px">
-                        <?php echo form_input (input('id_pegawai', '', '', 'form-control', 'Masukkan ID Pegawai...')) ?>
+                        <?php echo form_input (input('id_pegawai', '', '', 'form-control', 'Masukkan ID Pegawai...'), '', array("onkeyup" => "cariNamaPegawai(this)")) ?>
                     </div>
                     <div class="col-sm-4" style="padding:5px 15px">
-                        Nama : 
+                        Nama : <text id="namapegawai"></text>
                     </div>
                     <div class="col-sm-4" style="padding:5px 15px">
                         Waktu Transfer
+                    </div>
+                    <div class="col-sm-8" style="padding:5px 15px">
+                        <?php echo form_input (input('date_begin', 'date_begin', '', 'form-control', 'Masukkan Waktu Transfer...')) ?>
+                    </div>
+                    <div class="col-sm-4" style="padding:5px 15px">
+                        Bukti Transfer
                     </div>
                     <div class="col-sm-8" style="padding:5px 15px">
                         <?php echo form_input (input('date_begin', 'date_begin', '', 'form-control', 'Masukkan Waktu Transfer...')) ?>
@@ -276,10 +282,21 @@
         for (a = 0; a < tabcontent.length; a++) {
             $(tabcontent[a]).attr("style", "display:none");
             $(tabmenu[a]).removeClass("active-tab");
-            console.log(tabmenu[a]);
         }
         $(tabcontent[id]).attr("style", "display:flex");
         $(tabmenu[id]).addClass("active-tab");
+    }
+    
+    function cariNamaPegawai(idpegawai){
+        console.log($(idpegawai).val());
+        $.ajax({
+            type: 'GET',
+            url: "<?php echo base_url().'index.php/gaji/cari_nama_pegawai/' ?>" + $(idpegawai).val(),
+            success: function(response) {
+                console.log(response);
+                $("#namapegawai").text(response.nama_pegawai);
+            }
+        });
     }
 
 </script>
